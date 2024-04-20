@@ -1,9 +1,11 @@
+//import CrButton from "../components/CrButton"
+import CrNavBar from "../components/CrNavBar"
 
 const Home = () => {
   return (
-    <div>
-      <h1>Tienda Online</h1>
-    </div>
+    <>
+      <CrNavBar />
+    </>
   )
 }
 
