@@ -1,20 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ThemeProvider} from "@mui/material"
+import Home from "./page/Home";
+import { theme } from "./styles/Temas";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
 
   return (
-    <>
-      <h1>Tienda Online</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <ThemeProvider theme={theme}>
+      <Home />
+    </ThemeProvider>
   )
 }
 
