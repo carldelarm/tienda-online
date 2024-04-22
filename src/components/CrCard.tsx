@@ -19,10 +19,11 @@ export default function CrCard() {
     setCheckValue(!isCheck);
   }
 
+  /*
   const handleShow = () => {
     console.log('handleShow')
-
   }
+  */
 
   //Relacionado con CrModal
   const handleClickOpen = () => {
