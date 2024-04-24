@@ -10,20 +10,22 @@ import CrBtnAcion from './CrBtnAcion';
 import { useState } from 'react';
 import CrModal from './CrModal';
 
-export default function CrCard() {
+interface Props {
+  title: string;
+  imagen: string;
+  description: string;
+  rate: number;
+}
 
-  const [isCheck, setCheckValue] = useState(true);
-  const [open, setOpen] = useState(false);
+export default function CrCard({title,imagen,description,rate}: Props) {
+
+
+  const [isCheck,setCheckValue] = useState(true);
+  const [open,setOpen] = useState(false);
 
   const handleCheck = () => {
     setCheckValue(!isCheck);
   }
-
-  /*
-  const handleShow = () => {
-    console.log('handleShow')
-  }
-  */
 
   //Relacionado con CrModal
   const handleClickOpen = () => {
@@ -43,7 +45,7 @@ export default function CrCard() {
         <CardMedia
           sx={{ height: 500 }}
           component={'img'}
-          image="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+          image={imagen}
           title="green iguana"
           style={{
             width: '200',
@@ -54,13 +56,12 @@ export default function CrCard() {
           />
       <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
-          <CrRating />
+          <CrRating rate={rate} />
         </CardContent>
         <CardActions sx={{
             display: 'flex',

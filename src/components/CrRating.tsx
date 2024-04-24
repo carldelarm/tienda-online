@@ -3,8 +3,16 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-export default function CrRating() {
-  const [value, setValue] = useState<number | null>(2);
+interface Props {
+  rate: number;
+}
+
+export default function CrRating({rate}:Props) {
+
+  console.log('rate',rate);
+
+
+  const [value, setValue] = useState<number | null>(rate);
 
   return (
     <Box
