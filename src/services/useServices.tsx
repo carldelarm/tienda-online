@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { Product } from "../types/Productos";
 
 const useServices = (url:string) => {
 
-    const [data,setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [data,setData] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState(null);
 
     

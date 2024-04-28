@@ -9,19 +9,19 @@ import { Stack } from '@mui/material';
 import CrBtnAcion from './CrBtnAcion';
 import { useState } from 'react';
 import CrModal from './CrModal';
+import { Product } from '../types/Productos';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
-  title: string;
-  imagen: string;
-  description: string;
-  rate: number;
+  item:Product;
 }
 
-export default function CrCard({title,imagen,description,rate}: Props) {
-
+export default function CrCard({item}: Props) {
 
   const [isCheck,setCheckValue] = useState(true);
   const [open,setOpen] = useState(false);
+
+  const history = useHistory();
 
   const handleCheck = () => {
     setCheckValue(!isCheck);
@@ -36,6 +36,11 @@ export default function CrCard({title,imagen,description,rate}: Props) {
     setOpen(false);
   };
 
+  const handleVerDetalle = () => {
+    setOpen(false);
+    history.push(`/detalle/${item.id}`);
+  };
+
   return (
     <>
       <Card sx={{ maxWidth: 345}}>
@@ -45,7 +50,7 @@ export default function CrCard({title,imagen,description,rate}: Props) {
         <CardMedia
           sx={{ height: 500 }}
           component={'img'}
-          image={imagen}
+          image={item.image}
           title="green iguana"
           style={{
             width: '200',
@@ -56,12 +61,12 @@ export default function CrCard({title,imagen,description,rate}: Props) {
           />
       <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {title}
+            {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {description}
+            {item.description}
           </Typography>
-          <CrRating rate={rate} />
+          <CrRating rate={item.rating.rate} />
         </CardContent>
         <CardActions sx={{
             display: 'flex',
@@ -71,7 +76,7 @@ export default function CrCard({title,imagen,description,rate}: Props) {
           <CrBtnAcion isCheck={isCheck} handleCheck={handleCheck} />
         </CardActions>
       </Card>
-      <CrModal open={open} handleClose={handleClose} />
+      <CrModal open={open} handleClose={handleClose} handleVerDetalle={handleVerDetalle} />
     </>
   );
 }

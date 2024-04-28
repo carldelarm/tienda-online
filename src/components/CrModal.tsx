@@ -9,9 +9,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface Props {
   open: boolean
   handleClose: () => void
+  handleVerDetalle: () => void
 }
 
-export default function CrModal({open,handleClose}:Props) {
+export default function CrModal({open,handleClose,handleVerDetalle}:Props) {
   return (
     <React.Fragment>
       <Dialog
@@ -21,19 +22,16 @@ export default function CrModal({open,handleClose}:Props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Detalle del producto"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+            ¿Desea ver más información sobre el detalle del producto seleccionado?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
+          <Button onClick={handleClose}>Cerrar</Button>
+          <Button onClick={handleVerDetalle} autoFocus>Aceptar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

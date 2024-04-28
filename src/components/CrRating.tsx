@@ -9,9 +9,6 @@ interface Props {
 
 export default function CrRating({rate}:Props) {
 
-  console.log('rate',rate);
-
-
   const [value, setValue] = useState<number | null>(rate);
 
   return (

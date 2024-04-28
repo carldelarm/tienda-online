@@ -1,13 +1,18 @@
 import { ThemeProvider} from "@mui/material"
-import Home from "./page/Home";
 import { theme } from "./styles/Temas";
 
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+import Rutas from "./routers/Rutas";
 
 const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Router>
+        <Rutas />
+      </Router>
     </ThemeProvider>
   )
 }
