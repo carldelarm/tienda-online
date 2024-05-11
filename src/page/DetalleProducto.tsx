@@ -3,6 +3,7 @@ import HomeLayout from './layout/HomeLayout';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Product } from '../types/Productos';
+import CrComboBoxItems from "../components/CrComboBoxItems";
 
 const DetalleProducto = () => {
 
@@ -30,22 +31,22 @@ const DetalleProducto = () => {
 
     return (
         <HomeLayout>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh'
-            }}>
-                <h1>{detalle.title}</h1>
-                <p>Categoría: {detalle.category}</p>
-                <img src={detalle.image} alt={detalle.title} style={{width: '200px', height: '200px'}}/>
-                <p>{detalle.description}</p>
-                <p>Precio: {detalle.formattedPrice}</p>
-                <p>Puntación: {detalle.rating?.rate}</p>
-                <p>Cantidades disponibles: {detalle.rating?.count}</p>
+            <div className='contenedor-detalle'>
+                <div className='card'>
+                    <h1>{detalle.title}</h1>
+                    <p><span className='card-text-bold'>Categoría:</span> {detalle.category}</p>
+                    <img src={detalle.image} alt={detalle.title} style={{width: '200px', height: '200px'}}/>
+                    <p>{detalle.description}</p>
+                    <p><span className='card-text-bold'>Precio:</span> {detalle.formattedPrice}</p>
+                    <p><span className='card-text-bold'>Puntación:</span> {detalle.rating?.rate}</p>
+                    <p><span className='card-text-bold'>Cantidades disponibles:</span> {detalle.rating?.count}</p>
+                    {
+                        detalle.rating?.count > 0 && <CrComboBoxItems cantidadDisponible={detalle.rating?.count} />
+                    }
+                    <br />
 
-                <Button variant='contained' onClick={()=>history.push('/')}>Ir Atras</Button>
+                    <Button variant='contained' onClick={()=>history.push('/')}>Ir Atras</Button>
+                </div>
             </div>
         </HomeLayout>
     )
