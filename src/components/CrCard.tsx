@@ -13,18 +13,20 @@ import { Product } from '../types/Productos';
 import { useHistory } from 'react-router-dom';
 
 interface Props {
-  item:Product;
+  readonly item:Product;
+  readonly handleAddArticle?: any;
 }
 
-export default function CrCard({item}: Props) {
+export default function CrCard({ item,handleAddArticle }: Props) {
 
-  const [isCheck,setCheckValue] = useState(true);
+  const [isCheck, setIsCheck] = useState(false);
   const [open,setOpen] = useState(false);
 
   const history = useHistory();
 
-  const handleCheck = () => {
-    setCheckValue(!isCheck);
+  const handleCheck = (id:number) => {
+    setIsCheck(!isCheck);
+    handleAddArticle(id);
   }
 
   //Relacionado con CrModal
@@ -64,7 +66,7 @@ export default function CrCard({item}: Props) {
             {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {item.description}
+            <p>Precio: {item.formattedPrice}</p>
           </Typography>
           <CrRating rate={item.rating.rate} />
         </CardContent>
@@ -73,10 +75,13 @@ export default function CrCard({item}: Props) {
             justifyContent: 'space-between'
           }}>
           <CrBtnAcion isShow isCheck={isCheck} handleShow={handleClickOpen} />
-          <CrBtnAcion isCheck={isCheck} handleCheck={handleCheck} />
+          <CrBtnAcion isCheck={isCheck} handleCheck={() => handleCheck(item.id)} />
         </CardActions>
       </Card>
-      <CrModal open={open} handleClose={handleClose} handleVerDetalle={handleVerDetalle} />
+      <CrModal open={open} title={item.title}
+          handleClose={handleClose} 
+          handleVerDetalle={handleVerDetalle} 
+      />
     </>
   );
 }

@@ -18,11 +18,9 @@ const CrBtnAcion = ({isCheck,handleCheck,handleShow,isShow=false}:Props) => {
                     <RemoveRedEyeIcon color="primary" />
                 </IconButton>
             ) : (
-                <>
-                    <IconButton onClick={handleCheck}>
-                        {isCheck ? <LibraryAddIcon color="primary" /> : <LibraryAddCheckIcon color="success"/>}
-                    </IconButton>
-                </>
+                <IconButton onClick={handleCheck}>
+                    {!isCheck ? <LibraryAddIcon color="primary" /> : <LibraryAddCheckIcon color="success"/>}
+                </IconButton>
             )}
 
         </>

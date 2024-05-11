@@ -8,11 +8,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 interface Props {
   open: boolean
+  title: string
   handleClose: () => void
   handleVerDetalle: () => void
 }
 
-export default function CrModal({open,handleClose,handleVerDetalle}:Props) {
+export default function CrModal({open,title,handleClose,handleVerDetalle}:Props) {
   return (
     <React.Fragment>
       <Dialog
@@ -22,7 +23,7 @@ export default function CrModal({open,handleClose,handleVerDetalle}:Props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Detalle del producto"}
+          Producto seleccionado: {title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

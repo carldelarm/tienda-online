@@ -3,7 +3,7 @@ import {
     Route,
   } from "react-router-dom";
 import Home from "../page/Home";
-import DetalleProducto from "../components/DetalleProducto";
+import DetalleProducto from "../page/DetalleProducto";
 
 
 const Rutas = () => {

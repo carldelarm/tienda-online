@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import HomeLayout from '../page/layout/HomeLayout';
+import HomeLayout from './layout/HomeLayout';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Product } from '../types/Productos';
@@ -10,12 +10,19 @@ const DetalleProducto = () => {
     let {slug} = useParams();
     const [detalle, setDetalle] = useState<Product>({} as Product);
 
+    const urlApi = import.meta.env.VITE_URL_API_PRODUCTS as string;
+
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${slug}`)
+        fetch(`${urlApi}/${slug}`)
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            setDetalle(data);
+            const formattedItem = {
+                ...data,
+                isAddProduct:false,
+                formattedPrice: `${data.price} $`
+            }
+            setDetalle(formattedItem);
         })
         .catch(err => console.log(err))    
         
@@ -34,8 +41,9 @@ const DetalleProducto = () => {
                 <p>Categoría: {detalle.category}</p>
                 <img src={detalle.image} alt={detalle.title} style={{width: '200px', height: '200px'}}/>
                 <p>{detalle.description}</p>
-                <p>Precio: {detalle.price}</p>
+                <p>Precio: {detalle.formattedPrice}</p>
                 <p>Puntación: {detalle.rating?.rate}</p>
+                <p>Cantidades disponibles: {detalle.rating?.count}</p>
 
                 <Button variant='contained' onClick={()=>history.push('/')}>Ir Atras</Button>
             </div>

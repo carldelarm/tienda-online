@@ -13,8 +13,15 @@ const useServices = (url:string) => {
         fetch(url)
         .then(res=>res.json())
         .then(json=>{
-          console.log(json);
-          setData(json);
+          const formattedItems = json.map((item:Product) => {
+            return {
+              ...item,
+              isAddProduct:false,
+              formattedPrice: `${item.price} $`
+            }
+          });
+          console.log(formattedItems);
+          setData(formattedItems);
         })
         .catch(err=>{
           console.log(err)
@@ -22,7 +29,6 @@ const useServices = (url:string) => {
         })
         .finally(()=>{
           setLoading(false);
-          console.log('API call done')
         });
     }
 

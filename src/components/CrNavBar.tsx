@@ -57,7 +57,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function CrNavBar() {
+interface Props {
+  readonly numItemsAdd?: number
+  readonly handlePayment: () => void
+}
+
+export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -134,8 +139,9 @@ export default function CrNavBar() {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          onClick={handlePayment}
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={numItemsAdd} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -192,8 +198,9 @@ export default function CrNavBar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={handlePayment}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={numItemsAdd} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

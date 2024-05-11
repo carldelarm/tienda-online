@@ -2,13 +2,16 @@ import CrNavBar from '../../components/CrNavBar';
 
 interface Props {
     children?: React.ReactNode;
+    totalArticles?: number;
+    handlePayment: () => void;
 }
 
-const HomeLayout = ({children}:Props) => {
+const HomeLayout = ({children, totalArticles, handlePayment}:Props) => {
+
   return (
     <>
-        <CrNavBar />
-        {children}
+      <CrNavBar numItemsAdd={totalArticles} handlePayment={handlePayment} />
+      {children}
     </>
   )
 }
