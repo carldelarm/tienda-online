@@ -2,12 +2,12 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 interface Props {
-  cantidadDisponible?: number
+  readonly cantidadDisponible?: number
 }
 
 export default function CrComboBoxItems({ cantidadDisponible }: Props) {
 
-  const total = cantidadDisponible || 0;
+  const total = cantidadDisponible ?? 0;
 
   let totalItems: any[] = []; 
   for (let i = 1; i <= total; i++) {

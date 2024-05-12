@@ -60,8 +60,8 @@ export default function CrCard({ item,handleAddArticle }: Props) {
             objectFit: 'contain' 
           }}
           alt='Producto'
-          />
-      <CardContent>
+        />
+        <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {item.title}
           </Typography>

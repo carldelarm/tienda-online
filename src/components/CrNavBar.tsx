@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useHistory } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -70,6 +71,8 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const history = useHistory();
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,10 +81,19 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
     setMobileMoreAnchorEl(null);
   };
 
+  const handleMenuCloseSesion = () => {
+    history.push('/');
+  };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+/*   onClick={()=>{
+    history.push('/login');
+  }}
+ */
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -104,7 +116,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuCloseSesion}>Cerrar sesión</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -157,7 +169,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        Profile
       </MenuItem>
     </Menu>
   );
@@ -181,7 +193,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Curso react intermedio
+            Curso React Intermedio
           </Typography>
           <Search>
             <SearchIconWrapper>
