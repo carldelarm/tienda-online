@@ -1,10 +1,13 @@
 import { Button, TextField } from "@mui/material"
 import { Formik } from "formik";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import * as Yup from 'yup';
+import { AuthContext } from "../../../Auth/AuthContext";
 
 const FormLogin = () => {
 
+    const { login } = useContext(AuthContext);
     const history = useHistory();
     const initialValues = {user: '',password: ''};
     
@@ -12,6 +15,29 @@ const FormLogin = () => {
         user: Yup.string().required('Campo requerido').min(3, 'Too Short!').max(50, 'Too Long!'),
         password: Yup.string().required('Campo requerido')
     });
+
+    interface User {
+        user: string,
+        password: string
+    }
+
+    const handleFetch = async (values: User) => {
+        setTimeout(() => {
+            //Simula que fue al servidor y obtuvo los datos
+            const data = {
+                statusCode: 200,
+                message: 'OK',
+                user: {
+                    id: '1-server',
+                    name: values.user
+                }
+            }
+            if(data.statusCode === 200){
+                login(data.user);
+                history.push('/admin');
+            }
+        }, 2000);
+    }
 
     return (
         <div>
@@ -21,7 +47,7 @@ const FormLogin = () => {
                 onSubmit={(values, { setSubmitting }) => {
                     console.log('Iniciando sesión exitosamente');
                     console.log(values);
-                    history.push('/home');
+                    handleFetch(values);
                 }}
                 >
                 {({
@@ -31,7 +57,7 @@ const FormLogin = () => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isSubmitting,
+                    //isSubmitting,
                     /* and other goodies */
                 }) => (
                     <form onSubmit={handleSubmit} 
@@ -67,11 +93,6 @@ const FormLogin = () => {
                     </form>
                 )}
             </Formik>
-
-
-
-
-
         </div>
     )
 }

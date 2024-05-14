@@ -5,13 +5,19 @@ import {
 import Home from "../page/Home";
 import DetalleProducto from "../page/DetalleProducto";
 import Login from "../page/Login/Login";
-
+import Admin from "../page/Login/components/Admin";
+import PrivateRoute from "./PrivateRoute";
 
 const Rutas = () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/admin">
+        <PrivateRoute>
+          <Admin />
+        </PrivateRoute>
       </Route>
       <Route exact path="/home">
         <Home />

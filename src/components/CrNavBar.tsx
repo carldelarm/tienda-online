@@ -82,7 +82,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
   };
 
   const handleMenuCloseSesion = () => {
-    history.push('/');
+    history.push('/login');
   };
 
   const handleMenuClose = () => {

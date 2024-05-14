@@ -9,13 +9,15 @@ import { useState } from "react"
 
 const Home = () => {
 
-  //const location = useLocation();
-  //console.log(location.pathname);
-
-  const {data, loading} = useApi();
-
   const [ totalArticles,setTotalArticles ] = useState(0);
-
+  
+  const {data, loading} = useApi();
+  
+  /*
+  `const location = useLocation();
+  console.log(location.pathname);`
+  */
+  
   const handleAddArticle = (idProduct:number) => {
     data.filter((item:Product) => {
       if(item.id === idProduct){
@@ -42,7 +44,6 @@ const Home = () => {
     <HomeLayout totalArticles={totalArticles} handlePayment={handlePayment} >
       <Container maxWidth="lg">
           <Box mt={5} display={'flex'} gap={2} >
-
           {
             loading ? (
               <Box  >
