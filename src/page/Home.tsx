@@ -5,9 +5,14 @@ import useApi from "./hook/useApi"
 import { Product } from "../types/Productos"
 import HomeLayout from "./layout/HomeLayout"
 //import { useLocation } from "react-router-dom"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { PaymentContext } from "../store/PaymentContext"
 
 const Home = () => {
+
+  const { products,setProducts } = useContext(PaymentContext);
+  console.log('[Home] products: ',products)
+
 
   const [ totalArticles,setTotalArticles ] = useState(0);
   
@@ -30,6 +35,9 @@ const Home = () => {
       }
       return item;
     });
+    const addedProducts = data.filter((item:Product) => item.isAddProduct);
+    console.log('addedProducts',addedProducts);
+    setProducts(addedProducts);
   }
 
   const handlePayment = () => {

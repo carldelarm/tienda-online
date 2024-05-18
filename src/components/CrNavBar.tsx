@@ -17,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useHistory } from 'react-router-dom';
+import { PaymentContext } from '../store/PaymentContext';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -64,6 +65,11 @@ interface Props {
 }
 
 export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
+
+  
+  const { products } = React.useContext(PaymentContext);
+  console.log('[CrNavBar] products: ',products);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -153,7 +159,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
           color="inherit"
           onClick={handlePayment}
         >
-          <Badge badgeContent={numItemsAdd} color="error">
+          <Badge badgeContent={products?.length} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -212,7 +218,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
               color="inherit"
               onClick={handlePayment}
             >
-              <Badge badgeContent={numItemsAdd} color="error">
+              <Badge badgeContent={products?.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

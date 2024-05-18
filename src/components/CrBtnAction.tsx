@@ -10,7 +10,7 @@ interface Props {
     isShow?: boolean;
 }
 
-const CrBtnAcion = ({isCheck,handleCheck,handleShow,isShow=false}:Props) => {
+const CrBtnAction = ({isCheck,handleCheck,handleShow,isShow=false}:Props) => {
     return (
         <>
             {isShow ? (
@@ -27,4 +27,4 @@ const CrBtnAcion = ({isCheck,handleCheck,handleShow,isShow=false}:Props) => {
     )
 }
 
-export default CrBtnAcion
+export default CrBtnAction

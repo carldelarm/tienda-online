@@ -45,7 +45,7 @@ const DetalleProducto = () => {
                     }
                     <br />
 
-                    <Button variant='contained' onClick={()=>history.push('/home')}>Ir Atras</Button>
+                    <Button variant='contained' onClick={()=>history.push('/')}>Ir Atras</Button>
                 </div>
             </div>
         </HomeLayout>

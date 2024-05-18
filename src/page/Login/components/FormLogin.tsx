@@ -28,7 +28,7 @@ const FormLogin = () => {
                 statusCode: 200,
                 message: 'OK',
                 user: {
-                    id: '1-server',
+                    id: '1000',
                     name: values.user
                 }
             }

@@ -17,6 +17,9 @@ export const initialValue: AuthReducerContextProps = {
 }
 
 export const AuthReducer = (state = initialValue, action:actionType) => {
+
+    console.log('[AuthReducer] state (Antes de ejecutar el action.type) -> ',state);
+
     switch (action.type) {
         case types.login:
             return {

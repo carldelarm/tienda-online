@@ -7,6 +7,7 @@ import DetalleProducto from "../page/DetalleProducto";
 import Login from "../page/Login/Login";
 import Admin from "../page/Login/components/Admin";
 import PrivateRoute from "./PrivateRoute";
+import PaymentProvider from "../store/PaymentProvider";
 
 const Rutas = () => {
   return (
@@ -19,11 +20,15 @@ const Rutas = () => {
           <Admin />
         </PrivateRoute>
       </Route>
-      <Route exact path="/home">
-        <Home />
+      <Route exact path="/">
+        <PaymentProvider>
+          <Home />
+        </PaymentProvider>
       </Route>
       <Route exact path="/detalle/:slug">
-        <DetalleProducto />
+        <PaymentProvider>
+          <DetalleProducto />
+        </PaymentProvider>
       </Route>
       <Route path="/*">
         <h1>404</h1>

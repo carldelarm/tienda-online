@@ -9,9 +9,13 @@ interface AuthProviderProps {
 
 const init = () => {
     const user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    console.log('Usuario recuperado de localStorage: ',user);
+    let isAuth;
+    isAuth = user.name ? true : false;
+
     return {
-        isAuth: !!user,
-        user: user
+        isAuth,
+        user
     }
 }
 
@@ -37,7 +41,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         dispatch(action);
     }
 
-    console.log(AuthState);
+    console.log('[AuthProvider] AuthState -> ',AuthState);
 
     return (
         <AuthContext.Provider 

@@ -6,11 +6,11 @@ import Typography from '@mui/material/Typography';
 import CrChip from './CrChip';
 import CrRating from './CrRating';
 import { Stack } from '@mui/material';
-import CrBtnAcion from './CrBtnAcion';
 import { useState } from 'react';
 import CrModal from './CrModal';
 import { Product } from '../types/Productos';
 import { useHistory } from 'react-router-dom';
+import CrBtnAction from './CrBtnAction';
 
 interface Props {
   readonly item:Product;
@@ -66,7 +66,7 @@ export default function CrCard({ item,handleAddArticle }: Props) {
             {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            <p>Precio: {item.formattedPrice}</p>
+            Precio: {item.formattedPrice}
           </Typography>
           <CrRating rate={item.rating.rate} />
         </CardContent>
@@ -74,8 +74,8 @@ export default function CrCard({ item,handleAddArticle }: Props) {
             display: 'flex',
             justifyContent: 'space-between'
           }}>
-          <CrBtnAcion isShow isCheck={isCheck} handleShow={handleClickOpen} />
-          <CrBtnAcion isCheck={isCheck} handleCheck={() => handleCheck(item.id)} />
+          <CrBtnAction isShow isCheck={isCheck} handleShow={handleClickOpen} />
+          <CrBtnAction isCheck={isCheck} handleCheck={() => handleCheck(item.id)} />
         </CardActions>
       </Card>
       <CrModal open={open} title={item.title}

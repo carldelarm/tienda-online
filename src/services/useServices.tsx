@@ -20,7 +20,7 @@ const useServices = (url:string) => {
               formattedPrice: `${item.price} $`
             }
           });
-          console.log(formattedItems);
+          //console.log(formattedItems);
           setData(formattedItems);
         })
         .catch(err=>{
