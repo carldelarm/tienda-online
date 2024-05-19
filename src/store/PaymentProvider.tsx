@@ -8,8 +8,8 @@ interface PaymentProviderProps {
 }
 
 const init = () => {
-    const products = JSON.parse(localStorage.getItem('products') ?? '{}');
-    console.log('Productos recuperados de localStorage: ',products);
+    const products = JSON.parse(localStorage.getItem('products') ?? '[]');
+    //console.log('Productos recuperados de localStorage: ',products);
     return {products};
 }
 
@@ -26,7 +26,7 @@ const PaymentProvider = ({ children }: PaymentProviderProps) => {
         dispatch(action);
     }
 
-    console.log('[PaymentProvider] PaymentState -> ',PaymentState)
+    //console.log('[PaymentProvider] PaymentState -> ',PaymentState);
 
     return (
         <PaymentContext.Provider 

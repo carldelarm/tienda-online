@@ -17,7 +17,7 @@ export const initialValue: PaymentReducerContextProps = {
 
 export const PaymentReducer = (state = initialValue, action:actionType) => {
     
-    console.log('[PaymentReducer] state -> ',state);
+    //console.log('[PaymentReducer] state -> ',state);
 
     switch (action.type) {
         case 'SET_PRODUCTS':

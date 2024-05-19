@@ -5,51 +5,33 @@ import useApi from "./hook/useApi"
 import { Product } from "../types/Productos"
 import HomeLayout from "./layout/HomeLayout"
 //import { useLocation } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { PaymentContext } from "../store/PaymentContext"
+import { useContext } from "react"
 
 const Home = () => {
 
-  const { products,setProducts } = useContext(PaymentContext);
-  console.log('[Home] products: ',products)
+  const { products } = useContext(PaymentContext);
 
+  const history = useHistory();
 
-  const [ totalArticles,setTotalArticles ] = useState(0);
-  
   const {data, loading} = useApi();
   
   /*
   `const location = useLocation();
   console.log(location.pathname);`
   */
-  
-  const handleAddArticle = (idProduct:number) => {
-    data.filter((item:Product) => {
-      if(item.id === idProduct){
-        item.isAddProduct = !item.isAddProduct;
-        if(item.isAddProduct){
-          setTotalArticles(totalArticles + 1);
-        } else {  
-          setTotalArticles(totalArticles > 0 ? totalArticles - 1 : 0);
-        }
-      }
-      return item;
-    });
-    const addedProducts = data.filter((item:Product) => item.isAddProduct);
-    console.log('addedProducts',addedProducts);
-    setProducts(addedProducts);
-  }
 
   const handlePayment = () => {
-    data.filter((item:Product) => {
-      if(item.isAddProduct){
-        console.log('item',item);
-      }
-    });
+    if(products.length === 0) {
+      history.push('/');
+    } else {
+      history.push('/carrito');
+    }
   }
 
   return (
-    <HomeLayout totalArticles={totalArticles} handlePayment={handlePayment} >
+    <HomeLayout handlePayment={handlePayment} >
       <Container maxWidth="lg">
           <Box mt={5} display={'flex'} gap={2} >
           {
@@ -63,7 +45,7 @@ const Home = () => {
             <Grid container spacing={2}>
               {data.map((item:Product) => (
                   <Grid item key={item.id} xs={12} sm={6} md={2} xl={6} lg={4} >
-                    <CrCard item={item} handleAddArticle={handleAddArticle} />
+                    <CrCard item={item} />
                   </Grid>
               ))}
             </Grid>)

@@ -27,7 +27,7 @@ export default function CrModal({open,title,handleClose,handleVerDetalle}:Props)
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            ¿Desea ver más información sobre el detalle del producto seleccionado?
+            ¿Desea ver más información sobre el detalle de este producto?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

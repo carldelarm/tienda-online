@@ -60,15 +60,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface Props {
-  readonly numItemsAdd?: number
   readonly handlePayment: () => void
 }
 
-export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
+export default function CrNavBar({ handlePayment }: Props) {
 
-  
   const { products } = React.useContext(PaymentContext);
-  console.log('[CrNavBar] products: ',products);
+  //console.log('[CrNavBar] products: ',products);
+  const [totalArticles,setTotalArticles] = React.useState(0);
+
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -104,6 +104,14 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  React.useEffect(() => {
+    let counter = 0;
+    products?.map((item:any) => {
+      counter = counter + item.selectedQuantity;
+    });
+    setTotalArticles(counter);
+  }, [products]);
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -159,7 +167,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
           color="inherit"
           onClick={handlePayment}
         >
-          <Badge badgeContent={products?.length} color="error">
+          <Badge badgeContent={totalArticles} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -218,7 +226,7 @@ export default function CrNavBar({ numItemsAdd,handlePayment }: Props) {
               color="inherit"
               onClick={handlePayment}
             >
-              <Badge badgeContent={products?.length} color="error">
+              <Badge badgeContent={totalArticles} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

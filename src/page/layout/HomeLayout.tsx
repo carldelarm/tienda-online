@@ -6,11 +6,11 @@ interface Props {
     handlePayment: () => void;
 }
 
-const HomeLayout = ({children, totalArticles, handlePayment}:Props) => {
+const HomeLayout = ({children, handlePayment}:Props) => {
 
   return (
     <>
-      <CrNavBar numItemsAdd={totalArticles} handlePayment={handlePayment} />
+      <CrNavBar handlePayment={handlePayment} />
       {children}
     </>
   )

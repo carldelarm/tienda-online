@@ -8,6 +8,7 @@ import Login from "../page/Login/Login";
 import Admin from "../page/Login/components/Admin";
 import PrivateRoute from "./PrivateRoute";
 import PaymentProvider from "../store/PaymentProvider";
+import Carrito from "../page/Carrito";
 
 const Rutas = () => {
   return (
@@ -28,6 +29,11 @@ const Rutas = () => {
       <Route exact path="/detalle/:slug">
         <PaymentProvider>
           <DetalleProducto />
+        </PaymentProvider>
+      </Route>
+      <Route exact path="/carrito">
+        <PaymentProvider>
+          <Carrito />
         </PaymentProvider>
       </Route>
       <Route path="/*">

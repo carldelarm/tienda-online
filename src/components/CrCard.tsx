@@ -14,10 +14,9 @@ import CrBtnAction from './CrBtnAction';
 
 interface Props {
   readonly item:Product;
-  readonly handleAddArticle?: any;
 }
 
-export default function CrCard({ item,handleAddArticle }: Props) {
+export default function CrCard({ item }: Props) {
 
   const [isCheck, setIsCheck] = useState(false);
   const [open,setOpen] = useState(false);
@@ -26,7 +25,6 @@ export default function CrCard({ item,handleAddArticle }: Props) {
 
   const handleCheck = (id:number) => {
     setIsCheck(!isCheck);
-    handleAddArticle(id);
   }
 
   //Relacionado con CrModal
@@ -42,6 +40,8 @@ export default function CrCard({ item,handleAddArticle }: Props) {
     setOpen(false);
     history.push(`/detalle/${item.id}`);
   };
+
+  //const borderStyle:string = item.isAddProduct ? '2px solid green' : '2px solid green';
 
   return (
     <>
@@ -63,7 +63,7 @@ export default function CrCard({ item,handleAddArticle }: Props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {item.title}
+            {item.title} - [Cód Ref: {item.id}]
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Precio: {item.formattedPrice}
@@ -75,7 +75,7 @@ export default function CrCard({ item,handleAddArticle }: Props) {
             justifyContent: 'space-between'
           }}>
           <CrBtnAction isShow isCheck={isCheck} handleShow={handleClickOpen} />
-          <CrBtnAction isCheck={isCheck} handleCheck={() => handleCheck(item.id)} />
+          {/* <CrBtnAction isCheck={isCheck} handleCheck={() => handleCheck(item.id)} /> */}
         </CardActions>
       </Card>
       <CrModal open={open} title={item.title}

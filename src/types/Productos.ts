@@ -4,6 +4,7 @@ export interface Product {
     price: number;
     isAddProduct: boolean;
     formattedPrice: string;
+    selectedQuantity: number;
     description: string;
     category: string;
     image: string;

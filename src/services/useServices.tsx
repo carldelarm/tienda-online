@@ -17,7 +17,8 @@ const useServices = (url:string) => {
             return {
               ...item,
               isAddProduct:false,
-              formattedPrice: `${item.price} $`
+              formattedPrice: `${item.price} $`,
+              selectedQuantity: 0
             }
           });
           //console.log(formattedItems);
