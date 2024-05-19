@@ -1,8 +1,10 @@
-import { Button } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import HomeLayout from './layout/HomeLayout';
 import { useHistory } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { PaymentContext } from '../store/PaymentContext';
+import { Product } from '../types/Productos';
+import CrCarritoCard from '../components/CrCarritoCard';
 
 const Carrito = () => {
 
@@ -26,6 +28,10 @@ const Carrito = () => {
         if(updatedProducts.length === 0) history.push('/');
     }
 
+    const handleRedirectDetalle = (id: number) => {
+        history.push(`/detalle/${id}`);
+    }
+
     useEffect(() => {
         let subtotal = 0;
         products?.map((item:any) => {
@@ -38,21 +44,20 @@ const Carrito = () => {
         <HomeLayout handlePayment={handlePayment}>
             <div className='contenedor-detalle'>
                 <div className='card'>
-                    {
-                        products && products.map((item:any) => (
-                            <div key={item.id} className='card-product'>
-                                <h3>{item.title}</h3>
-                                <img src={item.image} alt={item.title} width='150px' />
-                                <p>Código Ref: {item.id}</p>
-                                <p>Precio unitario: {item.formattedPrice}</p>
-                                <p>Cantidad: {item.selectedQuantity}</p>
-                                <p>Precio: {item.price * item.selectedQuantity} $</p>
-                                <Button variant="outlined" onClick={() => handleDeleteProduct(item.id)}>Eliminar</Button>
-                                <hr />
-                            </div>
-                        ))
-                    }
-                    <p>Subtotal ({products.length} productos): {subtotal} $</p>
+                    <Box sx={{ flexGrow: 1 }}>
+                        <h2>CARRITO DE COMPRAS:</h2>
+                        <Grid container spacing={1}>
+                            {
+                                products && products.map((item: Product) => (
+                                     <CrCarritoCard key={item.id} item={item} 
+                                        handleDeleteProduct={handleDeleteProduct} 
+                                        handleRedirectDetalle={handleRedirectDetalle} 
+                                    />
+                                ))
+                            }
+                        </Grid>
+                    </Box>
+                    <p><span className='card-text-bold'>Subtotal ({products.length} productos):</span> {subtotal} $</p>
                     <Button variant='contained' onClick={()=>history.push('/')}>Ir a la pagina principal</Button>
                 </div>
             </div>

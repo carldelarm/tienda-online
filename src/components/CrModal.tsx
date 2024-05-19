@@ -9,11 +9,27 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface Props {
   open: boolean
   title: string
+  mensaje: string
+  botones: {
+    titleBtn1: string
+    showBtn1: boolean
+    titleBtn2: string
+    showBtn2: boolean
+  }
   handleClose: () => void
-  handleVerDetalle: () => void
+  handleVerDetalle?: () => void
 }
 
-export default function CrModal({open,title,handleClose,handleVerDetalle}:Props) {
+/*
+const botonesDefault = {
+  titleBtn1: 'Cerrar',
+  showBtn1: true,
+  titleBtn2: 'Acpetar',
+  showBtn2: true
+}
+*/
+
+export default function CrModal({open,title,mensaje,botones,handleClose,handleVerDetalle}:Props) {
   return (
     <React.Fragment>
       <Dialog
@@ -23,16 +39,24 @@ export default function CrModal({open,title,handleClose,handleVerDetalle}:Props)
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Producto seleccionado: {title}
+          {title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            ¿Desea ver más información sobre el detalle de este producto?
+            {mensaje}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cerrar</Button>
-          <Button onClick={handleVerDetalle} autoFocus>Aceptar</Button>
+          {
+            botones.showBtn1 ? (
+              <Button onClick={handleClose}>{botones.titleBtn1}</Button>
+            ) : null
+          }
+          {
+            botones.showBtn2 ? (
+              <Button onClick={handleVerDetalle} autoFocus>{botones.titleBtn2}</Button>
+            ) : null
+          }
         </DialogActions>
       </Dialog>
     </React.Fragment>

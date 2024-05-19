@@ -41,6 +41,14 @@ export default function CrCard({ item }: Props) {
     history.push(`/detalle/${item.id}`);
   };
 
+  const dataBotones = {
+    titleBtn1: 'Cerrar',
+    showBtn1: true,
+    titleBtn2: 'Aceptar',
+    showBtn2: true
+}
+
+
   //const borderStyle:string = item.isAddProduct ? '2px solid green' : '2px solid green';
 
   return (
@@ -79,6 +87,8 @@ export default function CrCard({ item }: Props) {
         </CardActions>
       </Card>
       <CrModal open={open} title={item.title}
+          mensaje='¿Desea ver más información sobre el detalle de este producto?'
+          botones={dataBotones}
           handleClose={handleClose} 
           handleVerDetalle={handleVerDetalle} 
       />
