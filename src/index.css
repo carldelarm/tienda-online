@@ -32,3 +32,8 @@
   font-weight: bold;
   color: rgba(9, 66, 172, 0.829);
 }
+
+.text-bold-green {
+  font-weight: bold;
+  color: rgba(9, 156, 4, 0.829);
+}

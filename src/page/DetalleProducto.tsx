@@ -15,9 +15,10 @@ const DetalleProducto = () => {
     const history = useHistory();
     let {slug} = useParams();
 
-    const [detalle, setDetalle] = useState<Product>({} as Product);
-    const [ quantity, setQuantity ] = useState<number>(1);
-    const [open,setOpen] = useState(false);
+    const [ detalle,setDetalle ] = useState<Product>({} as Product);
+    const [ quantity,setQuantity ] = useState<number>(1);
+    const [ open,setOpen ] = useState(false);
+    const [ showMsgCarrito, setShowMsgCarrito ] = useState<boolean>(false);
 
     const urlApi = import.meta.env.VITE_URL_API_PRODUCTS as string;
 
@@ -26,13 +27,13 @@ const DetalleProducto = () => {
         showBtn1: true,
         titleBtn2: '',
         showBtn2: false
-      }
+    }
 
-    useEffect(() => {
-        fetch(`${urlApi}/${slug}`)
-        .then(res => res.json())
-        .then(data => {
-            //console.log(data);
+    const getProductDetail = async () => {
+        try {
+            const response = await fetch(`${urlApi}/${slug}`);
+            const data = await response.json();
+
             const formattedItem = {
                 ...data,
                 isAddProduct:false,
@@ -40,9 +41,21 @@ const DetalleProducto = () => {
                 selectedQuantity: 0
             }
             setDetalle(formattedItem);
-        })
-        .catch(err => console.log(err))    
-        
+
+            const existe = products.find((item:Product) => item.id === formattedItem.id);
+            if(existe !== undefined){
+                setShowMsgCarrito(true);
+            } else {
+                setShowMsgCarrito(false);
+            }
+            
+        } catch (error) {
+            history.push('/*');
+        }
+    }
+
+    useEffect(() => {
+        getProductDetail();
     }, [slug]);
 
     const handleAddArticle = () => {
@@ -81,33 +94,49 @@ const DetalleProducto = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const isEmpty = (obj:Product) => {
+        return Object.keys(obj).length === 0;
+    };
     
     return (
         <HomeLayout handlePayment={handlePayment}>
             <div className='contenedor-detalle'>
                 <div className='card'>
                     <Box sx={{ flexGrow: 1 }}>
-                        <h2>CARRITO DE COMPRAS:</h2>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12} md={4} xl={3} lg={3} mt={4}>
-                                <img src={detalle.image} alt={detalle.title} style={{width: '90%'}}/>
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={8} xl={9} lg={9} >
-                                <h1>{detalle.title}</h1>
-                                <p>{detalle.description}</p>
-                                <p><span className='card-text-bold'>Categoría:</span> {detalle.category}</p>
-                                <p><span className='card-text-bold'>Precio:</span> {detalle.formattedPrice}</p>
-                                <p><span className='card-text-bold'>Puntación:</span> {detalle.rating?.rate}</p>
-                                <p><span className='card-text-bold'>Cantidades disponibles:</span> {detalle.rating?.count}</p>
-                                {
-                                    detalle.rating?.count > 0 && 
-                                    <CrComboBoxItems cantidadDisponible={detalle.rating?.count} setQuantity={setQuantity} />
-                                }
-                                <br />
-                                <Button variant='outlined' onClick={handleAddArticle}>Agregar al carrito</Button>&nbsp;&nbsp;
-                                <Button variant='contained' onClick={()=>history.push('/')}>Ir a la pagina principal</Button>
-                            </Grid>
-                        </Grid>
+                        {
+                            !isEmpty(detalle)  && (
+                                <>
+                                    <h2>DETALLE DEL PRODUCTO:</h2>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} sm={12} md={4} xl={3} lg={3} mt={4}>
+                                            <img src={detalle.image} alt={detalle.title} style={{width: '90%'}}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={8} xl={9} lg={9} >
+                                            <h1>{detalle.title}</h1>
+                                            <p>{detalle.description}</p>
+                                            <p><span className='card-text-bold'>Código Ref:</span> {detalle.id}</p>
+                                            <p><span className='card-text-bold'>Categoría:</span> {detalle.category}</p>
+                                            <p><span className='card-text-bold'>Precio:</span> {detalle.formattedPrice}</p>
+                                            <p><span className='card-text-bold'>Puntación:</span> {detalle.rating?.rate}</p>
+                                            <p><span className='card-text-bold'>Cantidades disponibles:</span> {detalle.rating?.count}</p>
+                                            {
+                                                showMsgCarrito && 
+                                                <p><span className='text-bold-green'>Este producto ya está adicionado al carrito de compras</span></p>
+                                            }
+
+                                            {
+                                                detalle.rating?.count > 0 && 
+                                                <CrComboBoxItems cantidadDisponible={detalle.rating?.count} setQuantity={setQuantity} />
+                                            }
+                                            <br />
+                                            <Button variant='outlined' onClick={handleAddArticle}>Agregar al carrito</Button>&nbsp;&nbsp;
+                                            <Button variant='contained' onClick={()=>history.push('/')}>Ir a la pagina principal</Button>
+                                        </Grid>
+                                    </Grid>
+                                </>
+                            )
+                        }
                     </Box>
                     <CrModal open={open} title={detalle.title}
                         mensaje='Su producto ha sido adicionado exitosamente al carrito de compras'

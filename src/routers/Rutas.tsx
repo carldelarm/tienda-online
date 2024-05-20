@@ -9,6 +9,7 @@ import Admin from "../page/Login/components/Admin";
 import PrivateRoute from "./PrivateRoute";
 import PaymentProvider from "../store/PaymentProvider";
 import Carrito from "../page/Carrito";
+import NotFound from "../page/NotFound";
 
 const Rutas = () => {
   return (
@@ -37,7 +38,7 @@ const Rutas = () => {
         </PaymentProvider>
       </Route>
       <Route path="/*">
-        <h1>404</h1>
+        <NotFound />
       </Route>
     </Switch>
   )
