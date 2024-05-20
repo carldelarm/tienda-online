@@ -81,6 +81,7 @@ const DetalleProducto = () => {
             setProducts([...newProductsList,newProductToAdd]);
         }
         setOpen(true);
+        setShowMsgCarrito(true);
     }
 
     const handlePayment = () => {
