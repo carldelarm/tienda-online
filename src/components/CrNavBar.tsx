@@ -12,8 +12,6 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useHistory } from 'react-router-dom';
@@ -152,6 +150,7 @@ export default function CrNavBar({ handlePayment }: Props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {/*       
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -160,6 +159,7 @@ export default function CrNavBar({ handlePayment }: Props) {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
+
       <MenuItem>
         <IconButton
           size="large"
@@ -173,6 +173,22 @@ export default function CrNavBar({ handlePayment }: Props) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+      */}
+
+      <MenuItem onClick={handlePayment}>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          onClick={handlePayment}
+        >
+          <Badge badgeContent={totalArticles} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Mi Carrito</p>
+      </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"

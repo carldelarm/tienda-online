@@ -125,7 +125,7 @@ const DetalleProducto = () => {
                                                 showMsgCarrito && 
                                                 <p><span className='text-bold-green'>Este producto ya está adicionado al carrito de compras</span></p>
                                             }
-
+                                            
                                             {
                                                 detalle.rating?.count > 0 && 
                                                 <CrComboBoxItems cantidadDisponible={detalle.rating?.count} setQuantity={setQuantity} />

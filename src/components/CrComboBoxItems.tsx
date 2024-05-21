@@ -4,9 +4,10 @@ import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } fro
 interface Props {
   readonly cantidadDisponible?: number,
   setQuantity: (value: number) => void;
+  initialValue?: number;
 }
 
-export default function CrComboBoxItems({ cantidadDisponible,setQuantity }: Props) {
+export default function CrComboBoxItems({ cantidadDisponible,setQuantity,initialValue }: Props) {
 
   const total = cantidadDisponible ?? 0;
 
@@ -15,8 +16,8 @@ export default function CrComboBoxItems({ cantidadDisponible,setQuantity }: Prop
     totalItems = [...totalItems, { label: (i+1).toString(), cantidad: (i+1) }];
   }
 
-  const defaultItem = totalItems[0].cantidad;
-  const [value, setValue] = useState(defaultItem);
+  const defaultValue = initialValue ? initialValue : totalItems[0].cantidad;
+  const [value, setValue] = useState(defaultValue);
 
   const onUpdateCount = (event: SelectChangeEvent): void => {
     const newValue = event.target.value;
