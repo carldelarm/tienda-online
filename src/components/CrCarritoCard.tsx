@@ -34,7 +34,7 @@ const CrCarritoCard = ({ item,handleDeleteProduct,handleRedirectDetalle }: Props
                 <p><span className='card-text-bold'>Precio unitario: </span>{item.formattedPrice}</p>
                 {/* <p><span className='card-text-bold'>Cantidad: </span>{item.selectedQuantity}</p> */}
                 {
-                    <CrComboBoxItems cantidadDisponible={item.rating?.count} setQuantity={setNewQuantity} myValue={newQuantity} />
+                    <CrComboBoxItems cantidadDisponible={item.rating?.count} setQuantity={setNewQuantity} initialValue={newQuantity} />
                 }
                 <p><span className='card-text-bold'>Precio: </span>{item.price * item.selectedQuantity} $</p>
                 <Button variant="outlined" onClick={() => handleRedirectDetalle((item.id))}>Ir al detalle</Button>&nbsp;&nbsp;
