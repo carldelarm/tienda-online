@@ -18,12 +18,13 @@
 }
 
 .card {
-  background: #eff4fa;
+  /* background: #eff4fa; */
+  /* background: #f3f3f3; */
   width: 80%;
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(12, 5, 116, 0.5);
+  box-shadow: 0 3px 4px rgba(12, 5, 116, 0.5);
   justify-content: center;
   padding: 5px 20px 20px 20px;
 }
@@ -36,4 +37,12 @@
 .text-bold-green {
   font-weight: bold;
   color: rgba(9, 156, 4, 0.829);
+}
+
+.contenedor-categoria {
+  width: 98%;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  margin: 20px;
 }

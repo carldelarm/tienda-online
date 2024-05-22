@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Stack } from '@mui/material';
 import HomeLayout from './layout/HomeLayout';
 import { useHistory, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
@@ -6,6 +6,9 @@ import { Product } from '../types/Productos';
 import CrComboBoxItems from "../components/CrComboBoxItems";
 import { PaymentContext } from '../store/PaymentContext';
 import CrModal from '../components/CrModal';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 
 const DetalleProducto = () => {
 
@@ -70,7 +73,8 @@ const DetalleProducto = () => {
             });
             const tempList = newProductsList.filter(product => product.id !== detalle.id);
             setProducts(tempList);
-            setProducts([...tempList,productToSearch]);
+            const sortedList = [...tempList,productToSearch].sort((a,b) => a.id - b.id);
+            setProducts(sortedList);
 
         } else {
             const newProductToAdd = {
@@ -78,7 +82,9 @@ const DetalleProducto = () => {
                 isAddProduct: true,
                 selectedQuantity: quantity
             }
-            setProducts([...newProductsList,newProductToAdd]);
+
+            const sortedList = [...newProductsList,newProductToAdd].sort((a,b) => a.id - b.id);
+            setProducts(sortedList);
         }
         setOpen(true);
         setShowMsgCarrito(true);
@@ -125,14 +131,14 @@ const DetalleProducto = () => {
                                                 showMsgCarrito && 
                                                 <p><span className='text-bold-green'>Este producto ya está adicionado al carrito de compras</span></p>
                                             }
-                                            
                                             {
                                                 detalle.rating?.count > 0 && 
                                                 <CrComboBoxItems cantidadDisponible={detalle.rating?.count} setQuantity={setQuantity} />
                                             }
                                             <br />
-                                            <Button variant='outlined' onClick={handleAddArticle}>Agregar al carrito</Button>&nbsp;&nbsp;
-                                            <Button variant='contained' onClick={()=>history.push('/')}>Ir a la pagina principal</Button>
+                                            <Button variant='outlined' endIcon={<AddShoppingCartIcon />} onClick={handleAddArticle}>Agregar al carrito</Button>&nbsp;&nbsp;
+                                            <Button variant='outlined' endIcon={<ShoppingCartIcon />} onClick={()=>history.push('/carrito')}>Ir al carrito</Button>&nbsp;&nbsp;
+                                            <Button variant='contained' endIcon={<Inventory2OutlinedIcon />} onClick={()=>history.push('/')}>Ver productos</Button>
                                         </Grid>
                                     </Grid>
                                 </>

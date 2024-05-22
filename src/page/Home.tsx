@@ -7,7 +7,8 @@ import HomeLayout from "./layout/HomeLayout"
 //import { useLocation } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import { PaymentContext } from "../store/PaymentContext"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
+import CrComboCategories from "../components/CrComboCategories"
 
 const Home = () => {
 
@@ -16,6 +17,8 @@ const Home = () => {
   const history = useHistory();
 
   const {data, loading} = useApi();
+
+  const [ categoy,setCategory ] = useState('');
   
   /*
   `const location = useLocation();
@@ -30,8 +33,16 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    console.log('category: ',categoy);
+
+  },[categoy]);
+
   return (
     <HomeLayout handlePayment={handlePayment} >
+      <div className="contenedor-categoria">
+        <CrComboCategories setCategory={setCategory} />
+      </div>
       <Container maxWidth="lg">
           <Box mt={5} display={'flex'} gap={2} >
           {
@@ -42,13 +53,16 @@ const Home = () => {
                 }
               </Box>
             ) : (
-            <Grid container spacing={2}>
-              {data.map((item:Product) => (
-                  <Grid item key={item.id} xs={12} sm={6} md={2} xl={6} lg={4} >
-                    <CrCard item={item} />
-                  </Grid>
-              ))}
-            </Grid>)
+              <>
+                <Grid container spacing={2}>
+                  {data.map((item:Product) => (
+                      <Grid item key={item.id} xs={12} sm={6} md={6} xl={4} lg={3} >
+                        <CrCard item={item} />
+                      </Grid>
+                  ))}
+                </Grid>
+              </>
+            )
           }
           </Box>
       </Container>

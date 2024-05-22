@@ -18,14 +18,17 @@ interface Props {
 
 export default function CrCard({ item }: Props) {
 
-  const [isCheck, setIsCheck] = useState(false);
+  //const [isCheck, setIsCheck] = useState(false);
+  const [isCheck] = useState(false);
   const [open,setOpen] = useState(false);
 
   const history = useHistory();
 
+  /*
   const handleCheck = (id:number) => {
     setIsCheck(!isCheck);
   }
+  */
 
   //Relacionado con CrModal
   const handleClickOpen = () => {
@@ -46,10 +49,7 @@ export default function CrCard({ item }: Props) {
     showBtn1: true,
     titleBtn2: 'Aceptar',
     showBtn2: true
-}
-
-
-  //const borderStyle:string = item.isAddProduct ? '2px solid green' : '2px solid green';
+  }
 
   return (
     <>
@@ -71,7 +71,7 @@ export default function CrCard({ item }: Props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {item.title} - [Cód Ref: {item.id}]
+            {item.title.length <= 30 ? item.title : item.title.substring(0, 30 - 3) + "..."} - [Cód Ref: {item.id}]
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Precio: {item.formattedPrice}

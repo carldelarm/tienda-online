@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { PaymentContext } from '../store/PaymentContext';
 import { Product } from '../types/Productos';
 import CrCarritoCard from '../components/CrCarritoCard';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 
 const Carrito = () => {
 
@@ -33,11 +34,11 @@ const Carrito = () => {
     }
 
     useEffect(() => {
-        let subtotal = 0;
-        products?.map((item:any) => {
-            subtotal = subtotal + (item.price * item.selectedQuantity);
+        let total:number = 0;
+        products?.map((item:Product) => {
+            total = total + (item.price * item.selectedQuantity);
         });
-        setSubtotal(subtotal);
+        setSubtotal(Number(total.toFixed(3).slice(0, -1)));
     }, [products]);
 
     return (
@@ -57,8 +58,10 @@ const Carrito = () => {
                             }
                         </Grid>
                     </Box>
-                    <p><span className='card-text-bold'>Subtotal ({products.length} productos):</span> {subtotal} $</p>
-                    <Button variant='contained' onClick={()=>history.push('/')}>Ir a la pagina principal</Button>
+                    <div style={{display:'flex', justifyContent:'right'}}>
+                        <p><span className='card-text-bold'>Subtotal ({products.length} productos):</span> {subtotal} $</p>
+                    </div>
+                    <Button variant='contained' endIcon={<Inventory2OutlinedIcon />} onClick={()=>history.push('/')}>Ver productos</Button>
                 </div>
             </div>
         </HomeLayout>

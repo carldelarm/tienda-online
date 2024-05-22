@@ -106,7 +106,7 @@ export default function CrNavBar({ handlePayment }: Props) {
   React.useEffect(() => {
     let counter = 0;
     products?.map((item:any) => {
-      counter = counter + item.selectedQuantity;
+      counter = counter + (item ? item.selectedQuantity : 0);
     });
     setTotalArticles(counter);
   }, [products]);
