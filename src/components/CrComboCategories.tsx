@@ -9,29 +9,34 @@ interface Props {
 const initialValues = [
   {
     id: 0,
-    name: 'Seleccione una categoría'
+    value: 'todas',
+    label: 'Todas'
   },
   {
     id: 1,
-    name: 'electronics'
+    value: 'electronics',
+    label: 'Electronics'
   },
   {
     id: 2,
-    name: 'jewelery',
+    value: 'jewelery',
+    label: 'Jewelery'
   },
   {
     id: 3,
-    name: "men's clothing",
+    value: "men's clothing",
+    label: "Men's clothing"
   },
   {
     id: 4,
-    name: "women's clothing",
+    value: "women's clothing",
+    label: "Women's clothing"
   }
 ];
 
 export default function CrComboCategories({ categories=initialValues,setCategory }: Props) {
 
-  const [value, setValue] = useState('Seleccione una categoría');
+  const [value, setValue] = useState('todas');
 
   const onUpdateCount = (event: SelectChangeEvent): void => {
     const newValue = event.target.value;
@@ -52,7 +57,7 @@ export default function CrComboCategories({ categories=initialValues,setCategory
         >
           {
             categories.map((item:any) => (
-              <MenuItem key={item.id} value={item.name}>{item.name}</MenuItem>
+              <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
             ))
           }
         </Select>
